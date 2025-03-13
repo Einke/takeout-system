@@ -1,0 +1,82 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    #druid: 遗留问题
+      driver-class-name: com.mysql.cj.jdbc.Driver #${sky.datasource.driver-class-name}
+      url: jdbc:mysql://localhost:3306/sky_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 381703 #${sky.datasource.password}
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 1
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast
+    # 设置jwt过期时间
+    admin-ttl: 72000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+
+    # 小程序端的jwt配置
+    user-secret-key: itheima
+    user-ttl: 72000000
+    user-token-name: authentication
+  wechat:
+    appid: wx9711245b6ad0eec7
+    secret: 7c4013fe53484f730c15be17849087f0
+  shop:
+    address: 北京市海淀区上地十街10号
+  baidu:
+    ak: GBPpSGRK0BPllF4UTsrkEAuoN3zX3UXZ
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    #自定义swagger前端请求路径,输入http:localhost:8080/swagger-ui.html会自动重定向到swagger页面
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs    #swagger后端请求地址
+    enabled: true   #是否开启文档功能
+  group-configs:
+    - group: '管理端接口'   #分组名称
+      paths-to-match: '/**'   #配置需要匹配的路径,默认为/**
+      packages-to-scan: com.sky.controller.admin    #配置要扫描包的路径,一般配置到启动类所在的包名
+    - group: '用户端接口'
+      paths-to-match: '/**'
+      packages-to-scan: com.sky.controller.user
+
+
+# knife4j的增强配置，不需要增强可以不配(建议配置一下)
+knife4j:
+  enable: true    #开启knife4j,无需添加@EnableKnife4j注解
+  setting:
+    language: zh_cn   #中文
+    swagger-model-name: 实体类列表   #重命名SwaggerModel名称,默认
