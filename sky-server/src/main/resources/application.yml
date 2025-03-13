@@ -47,13 +47,7 @@ sky:
     user-secret-key: itheima
     user-ttl: 72000000
     user-token-name: authentication
-  wechat:
-    appid: wx9711245b6ad0eec7
-    secret: 7c4013fe53484f730c15be17849087f0
-  shop:
-    address: 北京市海淀区上地十街10号
-  baidu:
-    ak: GBPpSGRK0BPllF4UTsrkEAuoN3zX3UXZ
+
 
 # springdoc-openapi项目配置
 springdoc:
